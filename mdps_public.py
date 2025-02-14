@@ -14,7 +14,6 @@ from streamlit_option_menu import option_menu
 
 diabetes_model = pickle.load(open('diabetes_model.sav', 'rb'))
 
-heart_disease_model = pickle.load(open('heart_disease_model.sav', 'rb'))
 
 parkinsons_model = pickle.load(open('parkinsons_model.sav', 'rb'))
 
@@ -26,9 +25,8 @@ with st.sidebar:
     selected = option_menu('Multiple Disease Prediction System',
                           
                           ['Diabetes Prediction',
-                           'Heart Disease Prediction',
                            'Parkinsons Prediction'],
-                          icons=['activity','heart','person'],
+                          icons=['activity','person'],
                           default_index=0)
     
     
@@ -81,94 +79,7 @@ if (selected == 'Diabetes Prediction'):
           diab_diagnosis = 'The person is not diabetic'
         
     st.success(diab_diagnosis)
-
-
-
-
-# Heart Disease Prediction Page
-if (selected == 'Heart Disease Prediction'):
-    
-    # page title
-    st.title('Heart Disease Prediction using ML')
-    
-    col1, col2, col3 = st.columns(3)
-    
-    with col1:
-        age = st.text_input('Age')
         
-    with col2:
-        sex = st.text_input('Sex')
-        
-    with col3:
-        cp = st.text_input('Chest Pain types')
-        
-    with col1:
-        trestbps = st.text_input('Resting Blood Pressure')
-        
-    with col2:
-        chol = st.text_input('Serum Cholestoral in mg/dl')
-        
-    with col3:
-        fbs = st.text_input('Fasting Blood Sugar > 120 mg/dl')
-        
-    with col1:
-        restecg = st.text_input('Resting Electrocardiographic results')
-        
-    with col2:
-        thalach = st.text_input('Maximum Heart Rate achieved')
-        
-    with col3:
-        exang = st.text_input('Exercise Induced Angina')
-        
-    with col1:
-        oldpeak = st.text_input('ST depression induced by exercise')
-        
-    with col2:
-        slope = st.text_input('Slope of the peak exercise ST segment')
-        
-    with col3:
-        ca = st.text_input('Major vessels colored by flourosopy')
-        
-    with col1:
-        thal = st.text_input('thal: 0 = normal; 1 = fixed defect; 2 = reversable defect')
-        
-        
-     
-     
-    # code for Prediction
-    heart_diagnosis = ''
-    
-    # creating a button for Prediction
-    
-    if st.button('Heart Disease Test Result'):
-        # Convert inputs to the correct data types
-            input_data = [[
-                int(age),
-                int(sex),
-                int(cp),
-                int(trestbps),
-                int(chol),
-                int(fbs),
-                int(restecg),
-                int(thalach),
-                int(exang),
-                float(oldpeak),
-                int(slope),
-                int(ca),
-                int(thal)
-            ]]
-        
-        # Make prediction
-        heart_prediction = heart_disease_model.predict([[age, sex, cp, trestbps, chol, fbs, restecg,thalach,exang,oldpeak,slope,ca,thal]])                          
-        
-        if (heart_prediction[0] == 1):
-          heart_diagnosis = 'The person is having heart disease'
-        else:
-          heart_diagnosis = 'The person does not have any heart disease'
-        
-    st.success(heart_diagnosis)
-        
-    
     
 
 # Parkinson's Prediction Page
