@@ -141,6 +141,23 @@ if (selected == 'Heart Disease Prediction'):
     # creating a button for Prediction
     
     if st.button('Heart Disease Test Result'):
+        # Convert inputs to the correct data types
+        try:
+            input_data = [[
+                int(age),
+                int(sex),
+                int(cp),
+                int(trestbps),
+                int(chol),
+                int(fbs),
+                int(restecg),
+                int(thalach),
+                int(exang),
+                float(oldpeak),
+                int(slope),
+                int(ca),
+                int(thal)
+            ]]
         heart_prediction = heart_disease_model.predict([[age, sex, cp, trestbps, chol, fbs, restecg,thalach,exang,oldpeak,slope,ca,thal]])                          
         
         if (heart_prediction[0] == 1):
